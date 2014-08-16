@@ -15,7 +15,7 @@ class Search
             Runtime runtime = Runtime.getRuntime();
             Process proc = runtime.exec("tasklist.exe /v");
 
-            List<String> arrResources = new ArrayList<>(0);
+            ArrayList<String> arrResources = new ArrayList<>(0);
             String strProcLine;
             BufferedReader input = new BufferedReader(new InputStreamReader(proc.getInputStream()));
             while ((strProcLine = input.readLine()) != null)

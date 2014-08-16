@@ -464,20 +464,23 @@ class ResourceManager
     // HISTORY
     //  * Created by SEK 08/09/2014
     // SOURCE
-    public static ArrayList<Resource> parse(List<String> arrResources)
+    public static ArrayList<Resource> parse(ArrayList<String> arrResources)
     {
 
         ArrayList<Resource> arrAllResources = new ArrayList<>(0);
-        List<String> tempResourcesSplit = new ArrayList<>(0);
-        List<String> tempResourceInfo = new ArrayList<>(0);
-        Resource newResource = new Resource();
+        ArrayList<String> tempResourcesSplit = new ArrayList<>(0);
+        ArrayList<String> tempResourceInfo = new ArrayList<>(0);
 
-        for(String resource : arrResources)
+        for(String strResource : arrResources)
         {
-            Integer y;
+            tempResourceInfo.clear();
+            tempResourcesSplit.clear();
 
+            Resource newResource = new Resource();
             newResource.create();
-            String[] temp = resource.split("  ");
+
+            Integer y;
+            String[] temp = strResource.split("  ");
 
             // Cleans array of additional entries
             for(y = 0; y < temp.length; y++)
@@ -557,8 +560,6 @@ class ResourceManager
             newResource.setUserName(tempResourceInfo.get(6));
             newResource.setCPUTime(tempResourceInfo.get(7));
             newResource.setWindowTitle(tempResourceInfo.get(8));
-
-            //System.out.println("newResource object: {name: " + newResource.getName() + ", PID: " + newResource.getPID() + ", sessionName: "  + newResource.getSessionName() + ", sessionNum: " + newResource.getSessionNum() + ", memUsage " +  newResource.getMemUsage() + ", status: " + newResource.getStatus() + ", userName: " + newResource.getUserName() + ", cpuTime: " + newResource.getCPUTime() + ", windowTitle: " + newResource.getWindowTitle() + "}");
 
             arrAllResources.add(newResource);
         }

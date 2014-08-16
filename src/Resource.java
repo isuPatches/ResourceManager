@@ -12,9 +12,9 @@
 class Resource
 {
     // Private fields specific to a Resource
-    private String name ="";
+    private String name = "";
     private String PID = "";
-    private String sessionName ="";
+    private String sessionName = "";
     private String sessionNum = "";
     private Integer memUsage = 0;
     private String status = "";
