@@ -1,0 +1,24 @@
+<component name="ProjectDictionaryState">
+  <dictionary name="Patches">
+    <words>
+      <w>badstat</w>
+      <w>badstatus</w>
+      <w>cputime</w>
+      <w>cputtime</w>
+      <w>highmem</w>
+      <w>klinefelter</w>
+      <w>longcpu</w>
+      <w>memusage</w>
+      <w>mutator</w>
+      <w>proc</w>
+      <w>rmgr</w>
+      <w>sessionname</w>
+      <w>sessionnum</w>
+      <w>sname</w>
+      <w>snum</w>
+      <w>taskkill</w>
+      <w>tasklist</w>
+      <w>windowtitle</w>
+    </words>
+  </dictionary>
+</component>
