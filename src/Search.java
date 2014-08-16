@@ -474,7 +474,7 @@ class Search
         }
         else
         {
-            if(strCompare.equals(strSearchCriteria.trim().toLowerCase()) || strCompare.contains(strSearchCriteria.trim().toLowerCase()))
+            if(strCompare.trim().toLowerCase().equals(strSearchCriteria.trim().toLowerCase()) || strCompare.trim().toLowerCase().contains(strSearchCriteria.trim().toLowerCase()))
             {
                 bCompareResult = true;
             }

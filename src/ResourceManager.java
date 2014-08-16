@@ -151,9 +151,9 @@ class ResourceManager
                         case "-m":
                             if(strSearchCriteria.contains(">") || strSearchCriteria.contains("<") || strSearchCriteria.contains(">=") || strSearchCriteria.contains("<=") || strSearchCriteria.contains("="))
                             {
-                                if (strSearchCriteria.replaceAll(",", "").matches("^[0-9]\\d*$"))
+                                if (strSearchCriteria.replaceAll("[<>=,]", "").matches("^[0-9]\\d*$"))
                                 {
-                                    Integer intMemUsage = Integer.parseInt(strSearchCriteria.replaceAll(",", ""));
+                                    Integer intMemUsage = Integer.parseInt(strSearchCriteria.replaceAll("[<>=,]", ""));
                                     if (strSearchCriteria.startsWith(">="))
                                     {
                                         View.byMemUsage(intMemUsage, ">=");
@@ -310,9 +310,9 @@ class ResourceManager
                         case "-m":
                             if(strSearchCriteria.contains(">") || strSearchCriteria.contains("<") || strSearchCriteria.contains(">=") || strSearchCriteria.contains("<=") || strSearchCriteria.contains("="))
                             {
-                                if (strSearchCriteria.replaceAll(",", "").matches("^[0-9]\\d*$"))
+                                if (strSearchCriteria.replaceAll("[<>=,]", "").matches("^[0-9]\\d*$"))
                                 {
-                                    Integer intMemUsage = Integer.parseInt(strSearchCriteria.replaceAll(",", ""));
+                                    Integer intMemUsage = Integer.parseInt(strSearchCriteria.replaceAll("[<>=,]", ""));
                                     if (strSearchCriteria.startsWith(">="))
                                     {
                                         Clean.byMemUsage(intMemUsage, ">=");
