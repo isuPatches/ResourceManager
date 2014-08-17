@@ -134,19 +134,54 @@ class Display
     {
         if(arrResources.size() > 0)
         {
-            System.out.println();
-            int intIndex = 0;
-            for (Resource resource : arrResources)
+            Integer intPagesNeeded = arrResources.size() / 10;
+            Integer intRemainder = arrResources.size() - (intPagesNeeded * 10);
+            if (intRemainder > 0)
             {
-                if(bWithIndex)
+                intPagesNeeded++;
+            }
+
+            Resource[][] arrPages = new Resource[intPagesNeeded][10];
+
+            Integer intPageIndex = 0;
+            Integer intPagePlacementPointer = 0;
+            Integer intResourceIndex = 0;
+            for(Resource resource : arrResources)
+            {
+                arrPages[intPageIndex][intPagePlacementPointer] = resource;
+                intPagePlacementPointer++;
+                intResourceIndex++;
+                if(intResourceIndex % 10  == 0)
                 {
-                    System.out.println("[" + intIndex + "] " + resource.toString());
+                    intPageIndex++;
+                    intPagePlacementPointer = 0;
                 }
-                else
+            }
+
+            System.out.println();
+            intResourceIndex = 0;
+            String strInput = "";
+            for(Resource[] page : arrPages)
+            {
+                for (int y = 0; y < page.length; y++)
                 {
-                    System.out.println(resource.toString());
+                    if (page[y] != null)
+                    {
+                        if (bWithIndex)
+                        {
+                            System.out.println("[" + intResourceIndex + "] " + page[y].toString());
+                        }
+                        else
+                        {
+                            System.out.println(page[y].toString());
+                        }
+                    }
                 }
-                intIndex++;
+                if(!strInput.equals("a") && arrPages.length > 1)
+                {
+                    System.out.println("...hit return to view next page or 'a' to view the rest...");
+                    strInput = Input.waitForReturn();
+                }
             }
         }
         else

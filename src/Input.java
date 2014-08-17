@@ -248,4 +248,29 @@ class Input
     {
         return strInput.replaceAll("[a-zA-Z!@#$%^&*()|?}{<>./~` ]", "").replaceAll("\\[", ""). replaceAll("]", "").replaceAll("-", "");
     }
+
+    public static String waitForReturn()
+    {
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+        String strInput = "";
+        try
+        {
+            Boolean bReturn = false;
+            do
+            {
+                strInput = bufferedReader.readLine();
+                if(strInput.trim().length() == 0 || strInput.trim().equals("a"))
+                {
+                    bReturn = true;
+                }
+            }
+            while(!bReturn);
+        }
+        catch (Exception exception)
+        {
+            // Do nothing
+        }
+
+        return strInput.trim();
+    }
 }
