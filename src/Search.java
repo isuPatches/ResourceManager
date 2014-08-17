@@ -38,49 +38,49 @@ class Search
         return arrAllResources;
     }
 
-    public static ArrayList<Resource> all(ArrayList<Resource> arrAllResources, String strSearchCriteria, Boolean bUseRegEx)
+    public static ArrayList<Resource> all(ArrayList<Resource> arrAllResources, String strSearchCriteria, Boolean bUseRegEx, Boolean bExactMatch)
     {
         ArrayList<Resource> arrResources = new ArrayList<>(0);
 
         for(Resource resource : arrAllResources)
         {
-            Boolean bCompareResult = compare(resource.getName(), strSearchCriteria, bUseRegEx);
+            Boolean bCompareResult = compare(resource.getName(), strSearchCriteria, bUseRegEx, bExactMatch);
             if(bCompareResult)
             {
                 arrResources.add(resource);
             }
 
-            bCompareResult = compare(resource.getPID(), strSearchCriteria, bUseRegEx);
+            bCompareResult = compare(resource.getPID(), strSearchCriteria, bUseRegEx, bExactMatch);
             if(bCompareResult)
             {
                 arrResources.add(resource);
             }
 
-            bCompareResult = compare(resource.getSessionName(), strSearchCriteria, bUseRegEx);
+            bCompareResult = compare(resource.getSessionName(), strSearchCriteria, bUseRegEx, bExactMatch);
             if(bCompareResult)
             {
                 arrResources.add(resource);
             }
 
-            bCompareResult = compare(resource.getSessionNum(), strSearchCriteria, bUseRegEx);
+            bCompareResult = compare(resource.getSessionNum(), strSearchCriteria, bUseRegEx, bExactMatch);
             if(bCompareResult)
             {
                 arrResources.add(resource);
             }
 
-            bCompareResult = compare(resource.getStatus(), strSearchCriteria, bUseRegEx);
+            bCompareResult = compare(resource.getStatus(), strSearchCriteria, bUseRegEx, bExactMatch);
             if(bCompareResult)
             {
                 arrResources.add(resource);
             }
 
-            bCompareResult = compare(resource.getUserName(), strSearchCriteria, bUseRegEx);
+            bCompareResult = compare(resource.getUserName(), strSearchCriteria, bUseRegEx, bExactMatch);
             if(bCompareResult)
             {
                 arrResources.add(resource);
             }
 
-            bCompareResult = compare(resource.getWindowTitle(), strSearchCriteria, bUseRegEx);
+            bCompareResult = compare(resource.getWindowTitle(), strSearchCriteria, bUseRegEx, bExactMatch);
             if(bCompareResult)
             {
                 arrResources.add(resource);
@@ -180,13 +180,13 @@ class Search
         return arrBadResources;
     }
 
-    public static ArrayList<Resource> byName(ArrayList<Resource> arrAllResources, String strSearchCriteria, Boolean bUseRegEx)
+    public static ArrayList<Resource> byName(ArrayList<Resource> arrAllResources, String strSearchCriteria, Boolean bUseRegEx, Boolean bExactMatch)
     {
         ArrayList<Resource> arrResources = new ArrayList<>(0);
 
         for(Resource resource : arrAllResources)
         {
-            Boolean bCompareResult = compare(resource.getName(), strSearchCriteria, bUseRegEx);
+            Boolean bCompareResult = compare(resource.getName(), strSearchCriteria, bUseRegEx, bExactMatch);
             if(bCompareResult)
             {
                 arrResources.add(resource);
@@ -196,13 +196,13 @@ class Search
         return arrResources;
     }
 
-    public static ArrayList<Resource> byPID(ArrayList<Resource> arrAllResources, String strSearchCriteria, Boolean bUseRegEx)
+    public static ArrayList<Resource> byPID(ArrayList<Resource> arrAllResources, String strSearchCriteria, Boolean bUseRegEx, Boolean bExactMatch)
     {
         ArrayList<Resource> arrResources = new ArrayList<>(0);
 
         for(Resource resource : arrAllResources)
         {
-            Boolean bCompareResult = compare(resource.getPID(), strSearchCriteria, bUseRegEx);
+            Boolean bCompareResult = compare(resource.getPID(), strSearchCriteria, bUseRegEx, bExactMatch);
             if(bCompareResult)
             {
                 arrResources.add(resource);
@@ -212,13 +212,13 @@ class Search
         return arrResources;
     }
 
-    public static ArrayList<Resource> bySessionName(ArrayList<Resource> arrAllResources, String strSearchCriteria, Boolean bUseRegEx)
+    public static ArrayList<Resource> bySessionName(ArrayList<Resource> arrAllResources, String strSearchCriteria, Boolean bUseRegEx, Boolean bExactMatch)
     {
         ArrayList<Resource> arrResources = new ArrayList<>(0);
 
         for(Resource resource : arrAllResources)
         {
-            Boolean bCompareResult = compare(resource.getSessionName(), strSearchCriteria, bUseRegEx);
+            Boolean bCompareResult = compare(resource.getSessionName(), strSearchCriteria, bUseRegEx, bExactMatch);
             if(bCompareResult)
             {
                 arrResources.add(resource);
@@ -228,13 +228,13 @@ class Search
         return arrResources;
     }
 
-    public static ArrayList<Resource> bySessionNum(ArrayList<Resource> arrAllResources, String strSearchCriteria, Boolean bUseRegEx)
+    public static ArrayList<Resource> bySessionNum(ArrayList<Resource> arrAllResources, String strSearchCriteria, Boolean bUseRegEx, Boolean bExactMatch)
     {
         ArrayList<Resource> arrResources = new ArrayList<>(0);
 
         for(Resource resource : arrAllResources)
         {
-            Boolean bCompareResult = compare(resource.getSessionNum(), strSearchCriteria, bUseRegEx);
+            Boolean bCompareResult = compare(resource.getSessionNum(), strSearchCriteria, bUseRegEx, bExactMatch);
             if(bCompareResult)
             {
                 arrResources.add(resource);
@@ -288,13 +288,13 @@ class Search
         return arrResources;
     }
 
-    public static ArrayList<Resource> byStatus(ArrayList<Resource> arrAllResources, String strSearchCriteria, Boolean bUseRegEx)
+    public static ArrayList<Resource> byStatus(ArrayList<Resource> arrAllResources, String strSearchCriteria, Boolean bUseRegEx, Boolean bExactMatch)
     {
         ArrayList<Resource> arrResources = new ArrayList<>(0);
 
         for(Resource resource : arrAllResources)
         {
-            Boolean bCompareResult = compare(resource.getStatus(), strSearchCriteria, bUseRegEx);
+            Boolean bCompareResult = compare(resource.getStatus(), strSearchCriteria, bUseRegEx, bExactMatch);
             if(bCompareResult)
             {
                 arrResources.add(resource);
@@ -304,13 +304,13 @@ class Search
         return arrResources;
     }
 
-    public static ArrayList<Resource> byUserName(ArrayList<Resource> arrAllResources, String strSearchCriteria, Boolean bUseRegEx)
+    public static ArrayList<Resource> byUserName(ArrayList<Resource> arrAllResources, String strSearchCriteria, Boolean bUseRegEx, Boolean bExactMatch)
     {
         ArrayList<Resource> arrResources = new ArrayList<>(0);
 
         for(Resource resource : arrAllResources)
         {
-            Boolean bCompareResult = compare(resource.getUserName(), strSearchCriteria, bUseRegEx);
+            Boolean bCompareResult = compare(resource.getUserName(), strSearchCriteria, bUseRegEx, bExactMatch);
             if(bCompareResult)
             {
                 arrResources.add(resource);
@@ -375,13 +375,13 @@ class Search
         return arrResources;
     }
 
-    public static ArrayList<Resource> byWindowTitle(ArrayList<Resource> arrAllResources, String strSearchCriteria, Boolean bUseRegEx)
+    public static ArrayList<Resource> byWindowTitle(ArrayList<Resource> arrAllResources, String strSearchCriteria, Boolean bUseRegEx, Boolean bExactMatch)
     {
         ArrayList<Resource> arrResources = new ArrayList<>(0);
 
         for(Resource resource : arrAllResources)
         {
-            Boolean bCompareResult = compare(resource.getWindowTitle(), strSearchCriteria, bUseRegEx);
+            Boolean bCompareResult = compare(resource.getWindowTitle(), strSearchCriteria, bUseRegEx, bExactMatch);
             if(bCompareResult)
             {
                 arrResources.add(resource);
@@ -456,7 +456,7 @@ class Search
         return bValidRegEx;
     }
 
-    private static boolean compare(String strCompare, String strSearchCriteria, Boolean bUseRegEx)
+    private static boolean compare(String strCompare, String strSearchCriteria, Boolean bUseRegEx, Boolean bExactMatch)
     {
         Boolean bCompareResult = false;
         Boolean bValidRegEx;
@@ -474,9 +474,19 @@ class Search
         }
         else
         {
-            if(strCompare.trim().toLowerCase().equals(strSearchCriteria.trim().toLowerCase()) || strCompare.trim().toLowerCase().contains(strSearchCriteria.trim().toLowerCase()))
+            if(bExactMatch)
             {
-                bCompareResult = true;
+                if(strCompare.equals(strSearchCriteria))
+                {
+                    bCompareResult = true;
+                }
+            }
+            else
+            {
+                if (strCompare.trim().toLowerCase().equals(strSearchCriteria.trim().toLowerCase()) || strCompare.trim().toLowerCase().contains(strSearchCriteria.trim().toLowerCase()))
+                {
+                    bCompareResult = true;
+                }
             }
         }
 

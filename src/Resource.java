@@ -346,16 +346,15 @@ class Resource
     @Override
     public String toString()
     {
-        return "Resource{" +
-                "name='" + name + '\'' +
-                ", PID='" + PID + '\'' +
-                ", sessionName='" + sessionName + '\'' +
-                ", sessionNum='" + sessionNum + '\'' +
-                ", memUsage=" + memUsage +
-                ", status='" + status + '\'' +
-                ", userName='" + userName + '\'' +
-                ", cpuTime='" + cpuTime + '\'' +
-                ", windowTitle='" + windowTitle + '\'' +
+        return "Resource{Name=" + name +
+                ", PID=" + PID +
+                ", Session Name=" + sessionName +
+                ", Session Num=" + sessionNum +
+                ", Mem Usage=" + memUsage +
+                ", Status=" + status +
+                ", User Name=" + userName +
+                ", CPU Time=" + cpuTime +
+                ", Window Title=" + windowTitle +
                 '}';
     }
 }

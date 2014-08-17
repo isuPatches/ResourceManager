@@ -107,18 +107,23 @@ class ResourceManager
         }
 
         Boolean bUseRegEx = false;
+        Boolean bExactMatch = false;
         if(arrFlags.size() >= 2)
         {
-            if (arrFlags.get(1).toLowerCase().equals("-r"))
+            if(arrFlags.get(1).toLowerCase().equals("-r"))
             {
                 bUseRegEx = true;
             }
+            else if(arrFlags.get(1).toLowerCase().equals("-e"))
+            {
+                bExactMatch = true;
+            }
         }
 
-        commandExecute(strCommandRoot, arrFlags, strSearchCriteria.toString(), bUseRegEx);
+        commandExecute(strCommandRoot, arrFlags, strSearchCriteria.toString(), bUseRegEx, bExactMatch);
     }
 
-    private static void commandExecute(String strCommandRoot, ArrayList<String> arrFlags, String strSearchCriteria, Boolean bUseRegEx)
+    private static void commandExecute(String strCommandRoot, ArrayList<String> arrFlags, String strSearchCriteria, Boolean bUseRegEx, Boolean bExactMatch)
     {
         switch (strCommandRoot)
         {
@@ -134,19 +139,19 @@ class ResourceManager
                             Display.helpSearch();
                             break;
                         case "-a":
-                            View.all(strSearchCriteria, bUseRegEx);
+                            View.all(strSearchCriteria, bUseRegEx, bExactMatch);
                             break;
                         case "-n":
-                            View.byName(strSearchCriteria, bUseRegEx);
+                            View.byName(strSearchCriteria, bUseRegEx, bExactMatch);
                             break;
                         case "-p":
-                            View.byPID(strSearchCriteria, bUseRegEx);
+                            View.byPID(strSearchCriteria, bUseRegEx, bExactMatch);
                             break;
                         case "-sna":
-                            View.bySessionName(strSearchCriteria, bUseRegEx);
+                            View.bySessionName(strSearchCriteria, bUseRegEx, bExactMatch);
                             break;
                         case "-snu":
-                            View.bySessionNum(strSearchCriteria, bUseRegEx);
+                            View.bySessionNum(strSearchCriteria, bUseRegEx, bExactMatch);
                             break;
                         case "-m":
                             if(strSearchCriteria.contains(">") || strSearchCriteria.contains("<") || strSearchCriteria.contains(">=") || strSearchCriteria.contains("<=") || strSearchCriteria.contains("="))
@@ -190,10 +195,10 @@ class ResourceManager
                             }
                             break;
                         case "-s":
-                            View.byStatus(strSearchCriteria, bUseRegEx);
+                            View.byStatus(strSearchCriteria, bUseRegEx, bExactMatch);
                             break;
                         case "-u":
-                            View.byUserName(strSearchCriteria, bUseRegEx);
+                            View.byUserName(strSearchCriteria, bUseRegEx, bExactMatch);
                             break;
                         case "-c":
                             if(strSearchCriteria.contains(">") || strSearchCriteria.contains("<") || strSearchCriteria.contains(">=") || strSearchCriteria.contains("<=") || strSearchCriteria.contains("="))
@@ -236,7 +241,7 @@ class ResourceManager
                             }
                             break;
                         case "-w":
-                            View.byWindowTitle(strSearchCriteria, bUseRegEx);
+                            View.byWindowTitle(strSearchCriteria, bUseRegEx, bExactMatch);
                             break;
                         default:
                             System.out.println("Unrecognized flag for search command, please try again. Type 'search ?' for a list a of valid flags.");
@@ -290,22 +295,22 @@ class ResourceManager
                             Display.helpClean();
                             break;
                         case "-a":
-                            Clean.all(strSearchCriteria, bUseRegEx);
+                            Clean.all(strSearchCriteria, bUseRegEx, bExactMatch);
                             break;
                         case "-b":
                             Clean.bad();
                             break;
                         case "-n":
-                            Clean.byName(strSearchCriteria, bUseRegEx);
+                            Clean.byName(strSearchCriteria, bUseRegEx, bExactMatch);
                             break;
                         case "-p":
-                            Clean.byPID(strSearchCriteria, bUseRegEx);
+                            Clean.byPID(strSearchCriteria, bUseRegEx, bExactMatch);
                             break;
                         case "-sna":
-                            Clean.bySessionName(strSearchCriteria, bUseRegEx);
+                            Clean.bySessionName(strSearchCriteria, bUseRegEx, bExactMatch);
                             break;
                         case "-snu":
-                            Clean.bySessionNum(strSearchCriteria, bUseRegEx);
+                            Clean.bySessionNum(strSearchCriteria, bUseRegEx, bExactMatch);
                             break;
                         case "-m":
                             if(strSearchCriteria.contains(">") || strSearchCriteria.contains("<") || strSearchCriteria.contains(">=") || strSearchCriteria.contains("<=") || strSearchCriteria.contains("="))
@@ -349,10 +354,10 @@ class ResourceManager
                             }
                             break;
                         case "-s":
-                            Clean.byStatus(strSearchCriteria, bUseRegEx);
+                            Clean.byStatus(strSearchCriteria, bUseRegEx, bExactMatch);
                             break;
                         case "-u":
-                            Clean.byUserName(strSearchCriteria, bUseRegEx);
+                            Clean.byUserName(strSearchCriteria, bUseRegEx, bExactMatch);
                             break;
                         case "-c":
                             if(strSearchCriteria.contains(">") || strSearchCriteria.contains("<") || strSearchCriteria.contains(">=") || strSearchCriteria.contains("<=") || strSearchCriteria.contains("="))
@@ -395,7 +400,7 @@ class ResourceManager
                             }
                             break;
                         case "-w":
-                            Clean.byWindowTitle(strSearchCriteria, bUseRegEx);
+                            Clean.byWindowTitle(strSearchCriteria, bUseRegEx, bExactMatch);
                             break;
                         case "-bs":
                             Clean.badStatus();

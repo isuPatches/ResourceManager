@@ -2,10 +2,10 @@ import java.util.*;
 
 class Clean
 {
-    public static void all(String strSearchCriteria, Boolean bUseRegEx)
+    public static void all(String strSearchCriteria, Boolean bUseRegEx, Boolean bExactMatch)
     {
         ArrayList<Resource> arrAllResources = Search.all();
-        ArrayList<Resource> arrResources = Search.all(arrAllResources, strSearchCriteria, bUseRegEx);
+        ArrayList<Resource> arrResources = Search.all(arrAllResources, strSearchCriteria, bUseRegEx, bExactMatch);
         Display.resources(arrResources, false);
         Clean.execute(arrResources);
     }
@@ -47,34 +47,34 @@ class Clean
         }
     }
 
-    public static void byName(String strSearchCriteria, Boolean bUseRegEx)
+    public static void byName(String strSearchCriteria, Boolean bUseRegEx, Boolean bExactMatch)
     {
         ArrayList<Resource> arrAllResources = Search.all();
-        ArrayList<Resource> arrResources = Search.byName(arrAllResources, strSearchCriteria, bUseRegEx);
+        ArrayList<Resource> arrResources = Search.byName(arrAllResources, strSearchCriteria, bUseRegEx, bExactMatch);
         Display.resources(arrResources, false);
         Clean.execute(arrResources);
     }
 
-    public static void byPID(String strSearchCriteria, Boolean bUseRegEx)
+    public static void byPID(String strSearchCriteria, Boolean bUseRegEx, Boolean bExactMatch)
     {
         ArrayList<Resource> arrAllResources = Search.all();
-        ArrayList<Resource> arrResources = Search.byPID(arrAllResources, strSearchCriteria, bUseRegEx);
+        ArrayList<Resource> arrResources = Search.byPID(arrAllResources, strSearchCriteria, bUseRegEx, bExactMatch);
         Display.resources(arrResources, false);
         Clean.execute(arrResources);
     }
 
-    public static void bySessionName(String strSearchCriteria, Boolean bUseRegEx)
+    public static void bySessionName(String strSearchCriteria, Boolean bUseRegEx, Boolean bExactMatch)
     {
         ArrayList<Resource> arrAllResources = Search.all();
-        ArrayList<Resource> arrResources = Search.bySessionName(arrAllResources, strSearchCriteria, bUseRegEx);
+        ArrayList<Resource> arrResources = Search.bySessionName(arrAllResources, strSearchCriteria, bUseRegEx, bExactMatch);
         Display.resources(arrResources, false);
         Clean.execute(arrResources);
     }
 
-    public static void bySessionNum(String strSearchCriteria, Boolean bUseRegEx)
+    public static void bySessionNum(String strSearchCriteria, Boolean bUseRegEx, Boolean bExactMatch)
     {
         ArrayList<Resource> arrAllResources = Search.all();
-        ArrayList<Resource> arrResources = Search.bySessionNum(arrAllResources, strSearchCriteria, bUseRegEx);
+        ArrayList<Resource> arrResources = Search.bySessionNum(arrAllResources, strSearchCriteria, bUseRegEx, bExactMatch);
         Display.resources(arrResources, false);
         Clean.execute(arrResources);
     }
@@ -87,18 +87,18 @@ class Clean
         Clean.execute(arrResources);
     }
 
-    public static void byStatus(String strSearchCriteria, Boolean bUseRegEx)
+    public static void byStatus(String strSearchCriteria, Boolean bUseRegEx, Boolean bExactMatch)
     {
         ArrayList<Resource> arrAllResources = Search.all();
-        ArrayList<Resource> arrResources = Search.byStatus(arrAllResources, strSearchCriteria, bUseRegEx);
+        ArrayList<Resource> arrResources = Search.byStatus(arrAllResources, strSearchCriteria, bUseRegEx, bExactMatch);
         Display.resources(arrResources, false);
         Clean.execute(arrResources);
     }
 
-    public static void byUserName(String strSearchCriteria, Boolean bUseRegEx)
+    public static void byUserName(String strSearchCriteria, Boolean bUseRegEx, Boolean bExactMatch)
     {
         ArrayList<Resource> arrAllResources = Search.all();
-        ArrayList<Resource> arrResources = Search.byUserName(arrAllResources, strSearchCriteria, bUseRegEx);
+        ArrayList<Resource> arrResources = Search.byUserName(arrAllResources, strSearchCriteria, bUseRegEx, bExactMatch);
         Display.resources(arrResources, false);
         Clean.execute(arrResources);
     }
@@ -111,10 +111,10 @@ class Clean
         Clean.execute(arrResources);
     }
 
-    public static void byWindowTitle(String strSearchCriteria, Boolean bUseRegEx)
+    public static void byWindowTitle(String strSearchCriteria, Boolean bUseRegEx, Boolean bExactMatch)
     {
         ArrayList<Resource> arrAllResources = Search.all();
-        ArrayList<Resource> arrResources = Search.byWindowTitle(arrAllResources, strSearchCriteria, bUseRegEx);
+        ArrayList<Resource> arrResources = Search.byWindowTitle(arrAllResources, strSearchCriteria, bUseRegEx, bExactMatch);
         Display.resources(arrResources, false);
         Clean.execute(arrResources);
     }
