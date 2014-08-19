@@ -96,7 +96,7 @@ class Display
         System.out.printf("%-10s %-5s %n", "  -n -e", "Search for resources where the name matches exactly");
         System.out.printf("%-10s %-5s %n", "  -p", "Search for resource where PID contains given criteria");
         System.out.printf("%-10s %-5s %n", "  -p -r", "Search for resources where the PID matches a regex");
-        System.out.printf("%-10s %-5s %n", "  -p -e", "Search for resources where the PID matches a exactly");
+        System.out.printf("%-10s %-5s %n", "  -p -e", "Search for resources where the PID matches exactly");
         System.out.printf("%-10s %-5s %n", "  -sna", "Search for resources where session name contains given criteria");
         System.out.printf("%-10s %-5s %n", "  -sna -r", "Search for resources where the session name matches a regex");
         System.out.printf("%-10s %-5s %n", "  -sna -e", "Search for resources where the session name matches exactly");

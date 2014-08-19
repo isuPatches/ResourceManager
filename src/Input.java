@@ -41,7 +41,7 @@ class Input
         try
         {
             System.out.println("");
-            System.out.println("Are you sure? (Y or Yes to confirm, N or No to abort)");
+            System.out.println("Are you sure? (Enter 'y' or 'yes' to confirm, 'n' or 'no' to abort)");
 
             do
             {
