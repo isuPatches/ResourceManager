@@ -167,7 +167,7 @@ class Input
                 else
                 {
                     System.out.println("");
-                    System.out.println("Killing all processes listed above...");
+                    System.out.println("Killing the following resources listed below:");
                     for (int x = 0; x < intResourcesToKillSize; x++)
                     {
                         arrInt.add(x);

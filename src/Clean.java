@@ -6,7 +6,7 @@ class Clean
     {
         ArrayList<Resource> arrAllResources = Search.all();
         ArrayList<Resource> arrResources = Search.all(arrAllResources, strSearchCriteria, bUseRegEx, bExactMatch);
-        Display.resources(arrResources, false);
+        Display.resources(arrResources, true);
         Clean.execute(arrResources);
     }
 
@@ -51,7 +51,7 @@ class Clean
     {
         ArrayList<Resource> arrAllResources = Search.all();
         ArrayList<Resource> arrResources = Search.byName(arrAllResources, strSearchCriteria, bUseRegEx, bExactMatch);
-        Display.resources(arrResources, false);
+        Display.resources(arrResources, true);
         Clean.execute(arrResources);
     }
 
@@ -59,7 +59,7 @@ class Clean
     {
         ArrayList<Resource> arrAllResources = Search.all();
         ArrayList<Resource> arrResources = Search.byPID(arrAllResources, strSearchCriteria, bUseRegEx, bExactMatch);
-        Display.resources(arrResources, false);
+        Display.resources(arrResources, true);
         Clean.execute(arrResources);
     }
 
@@ -67,7 +67,7 @@ class Clean
     {
         ArrayList<Resource> arrAllResources = Search.all();
         ArrayList<Resource> arrResources = Search.bySessionName(arrAllResources, strSearchCriteria, bUseRegEx, bExactMatch);
-        Display.resources(arrResources, false);
+        Display.resources(arrResources, true);
         Clean.execute(arrResources);
     }
 
@@ -75,7 +75,7 @@ class Clean
     {
         ArrayList<Resource> arrAllResources = Search.all();
         ArrayList<Resource> arrResources = Search.bySessionNum(arrAllResources, strSearchCriteria, bUseRegEx, bExactMatch);
-        Display.resources(arrResources, false);
+        Display.resources(arrResources, true);
         Clean.execute(arrResources);
     }
 
@@ -83,7 +83,7 @@ class Clean
     {
         ArrayList<Resource> arrAllResources = Search.all();
         ArrayList<Resource> arrResources = Search.byMemUsage(arrAllResources, intMemUsage, strOperator);
-        Display.resources(arrResources, false);
+        Display.resources(arrResources, true);
         Clean.execute(arrResources);
     }
 
@@ -91,7 +91,7 @@ class Clean
     {
         ArrayList<Resource> arrAllResources = Search.all();
         ArrayList<Resource> arrResources = Search.byStatus(arrAllResources, strSearchCriteria, bUseRegEx, bExactMatch);
-        Display.resources(arrResources, false);
+        Display.resources(arrResources, true);
         Clean.execute(arrResources);
     }
 
@@ -99,7 +99,7 @@ class Clean
     {
         ArrayList<Resource> arrAllResources = Search.all();
         ArrayList<Resource> arrResources = Search.byUserName(arrAllResources, strSearchCriteria, bUseRegEx, bExactMatch);
-        Display.resources(arrResources, false);
+        Display.resources(arrResources, true);
         Clean.execute(arrResources);
     }
 
@@ -107,7 +107,7 @@ class Clean
     {
         ArrayList<Resource> arrAllResources = Search.all();
         ArrayList<Resource> arrResources =  Search.byCPUTime(arrAllResources, strTime, strOperator);
-        Display.resources(arrResources, false);
+        Display.resources(arrResources, true);
         Clean.execute(arrResources);
     }
 
@@ -115,7 +115,7 @@ class Clean
     {
         ArrayList<Resource> arrAllResources = Search.all();
         ArrayList<Resource> arrResources = Search.byWindowTitle(arrAllResources, strSearchCriteria, bUseRegEx, bExactMatch);
-        Display.resources(arrResources, false);
+        Display.resources(arrResources, true);
         Clean.execute(arrResources);
     }
 
@@ -123,7 +123,7 @@ class Clean
     {
         ArrayList<Resource> arrAllResources = Search.all();
         ArrayList<Resource> arrBadStatusResources = Search.badStatus(arrAllResources);
-        Display.resources(arrBadStatusResources, false);
+        Display.resources(arrBadStatusResources, true);
         Clean.execute(arrBadStatusResources);
     }
 
@@ -131,7 +131,7 @@ class Clean
     {
         ArrayList<Resource> arrAllResources = Search.all();
         ArrayList<Resource> arrHighMemUsageResources = Search.highMemUsage(arrAllResources, 100000);
-        Display.resources(arrHighMemUsageResources, false);
+        Display.resources(arrHighMemUsageResources, true);
         Clean.execute(arrHighMemUsageResources);
     }
 
@@ -139,7 +139,7 @@ class Clean
     {
         ArrayList<Resource> arrAllResources = Search.all();
         ArrayList<Resource> arrLongCPUTimeResources = Search.longCPUTime(arrAllResources);
-        Display.resources(arrLongCPUTimeResources, false);
+        Display.resources(arrLongCPUTimeResources, true);
         Clean.execute(arrLongCPUTimeResources);
     }
 
@@ -155,6 +155,7 @@ class Clean
         else
         {
             arrResourcesToKill = ResourceManager.cleanKillList(arrIntResourcesToKill, arrResources);
+            Display.resources(arrResourcesToKill, true);
             Boolean bConfirmation = Input.getConfirmation();
             if(bConfirmation)
             {

@@ -176,6 +176,7 @@ class Display
                             System.out.println(page[y].toString());
                         }
                     }
+                    intResourceIndex++;
                 }
                 if(!strInput.equals("a") && arrPages.length > 1)
                 {
