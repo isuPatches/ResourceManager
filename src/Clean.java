@@ -145,25 +145,39 @@ class Clean
 
     private static void execute(ArrayList<Resource> arrResources)
     {
-        ArrayList<Integer> arrIntResourcesToKill = Input.getKillList(arrResources.size());
-        ArrayList<Resource> arrResourcesToKill;
-        if(arrIntResourcesToKill.size() == 1 && arrIntResourcesToKill.get(0).equals(-1))
+        if (arrResources.size() > 0)
         {
-            System.out.println("");
-            System.out.println("Aborting...");
-        }
-        else
-        {
-            arrResourcesToKill = ResourceManager.cleanKillList(arrIntResourcesToKill, arrResources);
-            Display.resources(arrResourcesToKill, true);
-            Boolean bConfirmation = Input.getConfirmation();
-            if(bConfirmation)
+            ArrayList<Integer> arrIntResourcesToKill = Input.getKillList(arrResources.size());
+            ArrayList<Resource> arrResourcesToKill;
+
+            if (arrIntResourcesToKill.size() == 1 && arrIntResourcesToKill.get(0).equals(-1))
             {
-                ResourceManager.kill(arrResourcesToKill);
+                System.out.println("");
+                System.out.println("Aborting...");
             }
             else
             {
-                System.out.println("You chose not to kill any of the processes.");
+                arrResourcesToKill = ResourceManager.cleanKillList(arrIntResourcesToKill, arrResources);
+                if (arrResourcesToKill.size() > 0)
+                {
+                    if (arrResourcesToKill.size() == arrResources.size())
+                    {
+                        System.out.println("Killing all resources found");
+                    }
+                    Boolean bConfirmation = Input.getConfirmation();
+                    if (bConfirmation)
+                    {
+                        ResourceManager.kill(arrResourcesToKill);
+                    }
+                    else
+                    {
+                        System.out.println("You choose not to kill any resources");
+                    }
+                }
+                else
+                {
+                    System.out.println("No valid resources to kill, please make sure the index entered was not out of bounds.");
+                }
             }
         }
     }

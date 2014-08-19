@@ -23,7 +23,7 @@ class ResourceManager
     // HISTORY
     //  * Created by SEK 08/01/2014
     // SOURCE
-    public static void main ( String [] args )
+    public static void main(String[] args)
     {
         System.out.println("Welcome to resource manager!");
         System.out.println();
@@ -38,7 +38,7 @@ class ResourceManager
 
         for(Integer intIndex : arrInput)
         {
-            if(intIndex >= 0 &&  intIndex < arrResourcesToKill.size())
+            if(intIndex >= 0 && intIndex < arrResourcesToKill.size())
             {
                 arrResourcesToKillCleaned.add(arrResourcesToKill.get(intIndex));
             }
@@ -64,7 +64,7 @@ class ResourceManager
             {
                 for(x = 0; x < arrFlags.size(); x++)
                 {
-                    if(temp.equals(arrFlags.get(x)))
+                    if (temp.equals(arrFlags.get(x)))
                     {
                         bFound = true;
                         break;
@@ -125,15 +125,15 @@ class ResourceManager
 
     private static void commandExecute(String strCommandRoot, ArrayList<String> arrFlags, String strSearchCriteria, Boolean bUseRegEx, Boolean bExactMatch)
     {
-        switch (strCommandRoot)
+        switch(strCommandRoot)
         {
             case "about":
                 Display.about();
                 break;
             case "search":
-                if(arrFlags.size() >= 1)
+                if (arrFlags.size() >= 1)
                 {
-                    switch(arrFlags.get(0).toLowerCase())
+                    switch (arrFlags.get(0).toLowerCase())
                     {
                         case "?": // View help for the search command
                             Display.helpSearch();
@@ -156,7 +156,7 @@ class ResourceManager
                         case "-m":
                             if(strSearchCriteria.contains(">") || strSearchCriteria.contains("<") || strSearchCriteria.contains(">=") || strSearchCriteria.contains("<=") || strSearchCriteria.contains("="))
                             {
-                                if (strSearchCriteria.replaceAll("[<>=,]", "").matches("^[0-9]\\d*$"))
+                                if(strSearchCriteria.replaceAll("[<>=,]", "").matches("^[0-9]\\d*$"))
                                 {
                                     Integer intMemUsage = Integer.parseInt(strSearchCriteria.replaceAll("[<>=,]", ""));
                                     if (strSearchCriteria.startsWith(">="))
@@ -203,7 +203,7 @@ class ResourceManager
                         case "-c":
                             if(strSearchCriteria.contains(">") || strSearchCriteria.contains("<") || strSearchCriteria.contains(">=") || strSearchCriteria.contains("<=") || strSearchCriteria.contains("="))
                             {
-                                if (strSearchCriteria.replaceAll("[<>=]", "").matches("([0-9]+):([0-5][0-9]):([0-5][0-9])"))
+                                if(strSearchCriteria.replaceAll("[<>=]", "").matches("([0-9]+):([0-5][0-9]):([0-5][0-9])"))
                                 {
                                     if (strSearchCriteria.startsWith(">="))
                                     {
@@ -315,26 +315,26 @@ class ResourceManager
                         case "-m":
                             if(strSearchCriteria.contains(">") || strSearchCriteria.contains("<") || strSearchCriteria.contains(">=") || strSearchCriteria.contains("<=") || strSearchCriteria.contains("="))
                             {
-                                if (strSearchCriteria.replaceAll("[<>=,]", "").matches("^[0-9]\\d*$"))
+                                if(strSearchCriteria.replaceAll("[<>=,]", "").matches("^[0-9]\\d*$"))
                                 {
                                     Integer intMemUsage = Integer.parseInt(strSearchCriteria.replaceAll("[<>=,]", ""));
-                                    if (strSearchCriteria.startsWith(">="))
+                                    if(strSearchCriteria.startsWith(">="))
                                     {
                                         Clean.byMemUsage(intMemUsage, ">=");
                                     }
-                                    else if (strSearchCriteria.startsWith("<="))
+                                    else if(strSearchCriteria.startsWith("<="))
                                     {
                                         Clean.byMemUsage(intMemUsage, "<=");
                                     }
-                                    else if (strSearchCriteria.startsWith("<"))
+                                    else if(strSearchCriteria.startsWith("<"))
                                     {
                                         Clean.byMemUsage(intMemUsage, "<");
                                     }
-                                    else if (strSearchCriteria.startsWith(">"))
+                                    else if(strSearchCriteria.startsWith(">"))
                                     {
                                         Clean.byMemUsage(intMemUsage, ">");
                                     }
-                                    else if (strSearchCriteria.startsWith("="))
+                                    else if(strSearchCriteria.startsWith("="))
                                     {
                                         Clean.byMemUsage(intMemUsage, "=");
                                     }
@@ -362,25 +362,25 @@ class ResourceManager
                         case "-c":
                             if(strSearchCriteria.contains(">") || strSearchCriteria.contains("<") || strSearchCriteria.contains(">=") || strSearchCriteria.contains("<=") || strSearchCriteria.contains("="))
                             {
-                                if (strSearchCriteria.replaceAll("[<>=]", "").matches("([0-9]+):([0-5][0-9]):([0-5][0-9])"))
+                                if(strSearchCriteria.replaceAll("[<>=]", "").matches("([0-9]+):([0-5][0-9]):([0-5][0-9])"))
                                 {
-                                    if (strSearchCriteria.startsWith(">="))
+                                    if(strSearchCriteria.startsWith(">="))
                                     {
                                         Clean.byCPUTime(strSearchCriteria.replaceAll("[<>=]", ""), ">=");
                                     }
-                                    else if (strSearchCriteria.startsWith("<="))
+                                    else if(strSearchCriteria.startsWith("<="))
                                     {
                                         Clean.byCPUTime(strSearchCriteria.replaceAll("[<>=]", ""), "<=");
                                     }
-                                    else if (strSearchCriteria.startsWith("<"))
+                                    else if(strSearchCriteria.startsWith("<"))
                                     {
                                         Clean.byCPUTime(strSearchCriteria.replaceAll("[<>=]", ""), "<");
                                     }
-                                    else if (strSearchCriteria.startsWith(">"))
+                                    else if(strSearchCriteria.startsWith(">"))
                                     {
                                         Clean.byCPUTime(strSearchCriteria.replaceAll("[<>=]", ""), ">");
                                     }
-                                    else if (strSearchCriteria.startsWith("="))
+                                    else if(strSearchCriteria.startsWith("="))
                                     {
                                         Clean.byCPUTime(strSearchCriteria.replaceAll("[<>=]", ""), "=");
                                     }
@@ -443,12 +443,26 @@ class ResourceManager
             System.out.println();
             for(Resource resource : arrResourcesToKill)
             {
-                Runtime.getRuntime().exec("taskkill /F /IM " + resource.getName()).waitFor();
-                System.out.println("Killing process with name: " + resource.getName() + " and PID: " + resource.getPID() + "...please wait...");
-                if(resource.getName().equals("explorer.exe"))
+                if (!resource.getWindowTitle().trim().toLowerCase().contains("resourcemanager") && !resource.getWindowTitle().trim().toLowerCase().contains("java"))
                 {
-                    System.out.println("Restarting explorer.exe...");
-                    Runtime.getRuntime().exec("explorer.exe");
+                    if (System.getProperty("os.name").toLowerCase().contains("windows"))
+                    {
+                        Runtime.getRuntime().exec("taskkill /F /IM " + resource.getName()).waitFor();
+                    }
+                    else
+                    {
+                        Runtime.getRuntime().exec("kill -9 " + resource.getName()).waitFor();
+                    }
+                    System.out.println("Killing process with name: " + resource.getName() + " and PID: " + resource.getPID() + "...please wait...");
+                    if (resource.getName().equals("explorer.exe"))
+                    {
+                        System.out.println("Restarting explorer.exe...");
+                        Runtime.getRuntime().exec("explorer.exe");
+                    }
+                }
+                else
+                {
+                    System.out.println("Not letting app kill itself or java...");
                 }
             }
         }
@@ -485,15 +499,15 @@ class ResourceManager
             newResource.create();
 
             Integer y;
-            String[] temp = strResource.split("  ");
+            String[] strTempDoubleSpace = strResource.split("  ");
 
             // Cleans array of additional entries
-            for(y = 0; y < temp.length; y++)
+            for(y = 0; y < strTempDoubleSpace.length; y++)
             {
                 // If the value in the array at the y index is empty (no chars other than "")
-                if(temp[y].trim().length() != 0)
+                if(strTempDoubleSpace[y].trim().length() != 0)
                 {
-                    tempResourcesSplit.add(temp[y]);
+                    tempResourcesSplit.add(strTempDoubleSpace[y]);
                 }
             }
 
@@ -501,22 +515,22 @@ class ResourceManager
             tempResourceInfo.add(tempResourcesSplit.get(0).trim());
 
             // Parses PID info
-            temp = tempResourcesSplit.get(1).split(" ");
-            for(y = 0;y < temp.length; y++)
+            String[] strTempSingleSpace = tempResourcesSplit.get(1).split(" ");
+            for(y = 0;y < strTempSingleSpace.length; y++)
             {
-                if(temp[y].trim().length() != 0)
+                if(strTempSingleSpace[y].trim().length() != 0)
                 {
-                    tempResourceInfo.add(temp[y].trim());
+                    tempResourceInfo.add(strTempSingleSpace[y].trim());
                     break;
                 }
             }
             // Parses session name info
             // Starts at y + 1 to skip previously search parts
-            for(int n = y + 1;n < temp.length; n++)
+            for(int n = y + 1;n < strTempDoubleSpace.length; n++)
             {
-                if(temp[n].trim().length() != 0)
+                if(strTempSingleSpace[n].trim().length() != 0)
                 {
-                    tempResourceInfo.add(temp[n].trim());
+                    tempResourceInfo.add(strTempSingleSpace[n].trim());
                     break;
                 }
             }
@@ -525,19 +539,19 @@ class ResourceManager
             tempResourceInfo.add(tempResourcesSplit.get(2).trim());
 
             // Parses the memory usage and status info - removes spaces, comma, and K and splits at space
-            temp = tempResourcesSplit.get(3).replaceAll(",", "").replaceAll("K", "").split(" ");
-            for(y = 0;y < temp.length; y++)
+            strTempSingleSpace = tempResourcesSplit.get(3).replaceAll(",", "").replaceAll("K", "").split(" ");
+            for(y = 0;y < strTempSingleSpace.length; y++)
             {
-                if(temp[y].equals("Not") && temp[y + 1].equals("Responding"))
+                if(strTempSingleSpace[y].equals("Not") && strTempSingleSpace[y + 1].equals("Responding"))
                 {
-                    tempResourceInfo.add(temp[y] + ' ' + temp[y+1]);
+                    tempResourceInfo.add(strTempSingleSpace[y] + ' ' + strTempSingleSpace[y+1]);
                     y++;
                 }
                 else
                 {
-                    if (temp[y].trim().length() > 0)
+                    if (strTempSingleSpace[y].trim().length() > 0)
                     {
-                        tempResourceInfo.add(temp[y]);
+                        tempResourceInfo.add(strTempSingleSpace[y]);
                     }
                 }
             }
@@ -545,15 +559,23 @@ class ResourceManager
             // Parses the uer name info
             tempResourceInfo.add(tempResourcesSplit.get(4).trim());
 
-            // Parses the CPU Time and Window Title info
-            temp = tempResourcesSplit.get(5).split(" ");
-            for(y = 0;y < temp.length; y++)
+            // Parses the CPU Time
+            strTempSingleSpace = tempResourcesSplit.get(5).split(" ");
+            for(y = 0;y < strTempSingleSpace.length; y++)
             {
-                if(temp[y].trim().length() > 0)
+                if(strTempSingleSpace[y].matches("([0-9]+):([0-5][0-9]):([0-5][0-9])"))
                 {
-                    tempResourceInfo.add(temp[y]);
+                    tempResourceInfo.add(strTempSingleSpace[y]);
+                    break;
                 }
             }
+            // Parses Window Title
+            StringBuilder strWindowTitle = new StringBuilder(0);
+            for(int z = y + 1; z < strTempSingleSpace.length;z++)
+            {
+                strWindowTitle.append(strTempSingleSpace[z]);
+            }
+            tempResourceInfo.add(strWindowTitle.toString());
 
             newResource.setName(tempResourceInfo.get(0));
             newResource.setPID(tempResourceInfo.get(1));

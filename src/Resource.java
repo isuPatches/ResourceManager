@@ -346,7 +346,7 @@ class Resource
     @Override
     public String toString()
     {
-        return "Resource{Name=" + name +
+        return "{Name=" + name +
                 ", PID=" + PID +
                 ", Session Name=" + sessionName +
                 ", Session Num=" + sessionNum +
