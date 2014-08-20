@@ -157,12 +157,12 @@ class Search
         return arrResources;
     }
 
-    public static ArrayList<Resource> bad(ArrayList<Resource> arrAllResources, Integer intMemUsageVal)
+    public static ArrayList<Resource> bad(ArrayList<Resource> arrAllResources, Integer intMemUsageVal, String strCPUTime)
     {
         ArrayList<Resource> arrBadResources = new ArrayList<>(0);
         ArrayList<Resource> arrBadStatusResources = Search.badStatus(arrAllResources);
         ArrayList<Resource> arrHighMemResources = Search.highMemUsage(arrAllResources, intMemUsageVal);
-        ArrayList<Resource> arrLongCPUTimeResources = Search.longCPUTime(arrAllResources);
+        ArrayList<Resource> arrLongCPUTimeResources = Search.longCPUTime(arrAllResources, strCPUTime);
 
         for(Resource resource : arrBadStatusResources)
         {
@@ -421,20 +421,31 @@ class Search
         return arrResources;
     }
 
-    public static ArrayList<Resource> longCPUTime(ArrayList<Resource> arrAllResources)
+    public static ArrayList<Resource> longCPUTime(ArrayList<Resource> arrAllResources, String strCPUTTime)
     {
         ArrayList<Resource> arrResources = new ArrayList<>(0);
 
         for(Resource resource : arrAllResources)
         {
-            String[] temp = resource.getCPUTime().split(":");
-            if(Integer.parseInt(temp[0].trim()) > 1)
+            String[] temp1 = resource.getCPUTime().split(":");
+            String[] temp2 = strCPUTTime.split(":");
+            if(Integer.parseInt(temp1[0].trim()) > Integer.parseInt(temp2[0].trim()))
             {
                 arrResources.add(resource);
             }
-            else if(Integer.parseInt(temp[1].trim()) > 30)
+            else if(Integer.parseInt(temp1[0].trim()) == Integer.parseInt(temp2[0].trim()))
             {
-                arrResources.add(resource);
+                if(Integer.parseInt(temp1[1].trim()) > Integer.parseInt(temp2[1].trim()))
+                {
+                    arrResources.add(resource);
+                }
+                else if(Integer.parseInt(temp1[1].trim()) == Integer.parseInt(temp2[1].trim()))
+                {
+                    if(Integer.parseInt(temp1[2].trim()) > Integer.parseInt(temp2[2].trim()))
+                    {
+                        arrResources.add(resource);
+                    }
+                }
             }
         }
 

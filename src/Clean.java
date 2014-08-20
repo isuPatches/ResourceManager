@@ -10,41 +10,12 @@ class Clean
         Clean.execute(arrResources);
     }
 
-    public static void bad()
+    public static void bad(Integer intCustomMemUsageVal, String strCPUTime)
     {
         ArrayList<Resource> arrAllResources = Search.all();
-        ArrayList<Resource> arrBadResources;
-
-        Object bUseCustomMemUsage = Input.getUseCustomMemUsage();
-        if(!bUseCustomMemUsage.equals("abort"))
-        {
-            if(bUseCustomMemUsage.equals(true))
-            {
-                Integer intCustomMemUsageVal = Input.getCustomMemUsageVal();
-                if(!intCustomMemUsageVal.equals(-1))
-                {
-                    arrBadResources = Search.bad(arrAllResources, intCustomMemUsageVal);
-                    Display.resources(arrBadResources, true);
-                    Clean.execute(arrBadResources);
-                }
-                else
-                {
-                    System.out.println("");
-                    System.out.println("Aborting...");
-                }
-            }
-            else
-            {
-                arrBadResources = Search.bad(arrAllResources, 100000);
-                Display.resources(arrBadResources, true);
-                Clean.execute(arrBadResources);
-            }
-        }
-        else
-        {
-            System.out.println("");
-            System.out.println("Aborting...");
-        }
+        ArrayList<Resource> arrBadResources = Search.bad(arrAllResources, intCustomMemUsageVal, strCPUTime);
+        Display.resources(arrBadResources, true);
+        Clean.execute(arrBadResources);
     }
 
     public static void byName(String strSearchCriteria, Boolean bUseRegEx, Boolean bExactMatch)
@@ -127,18 +98,18 @@ class Clean
         Clean.execute(arrBadStatusResources);
     }
 
-    public static void highMemUsage()
+    public static void highMemUsage(Integer intMemUsageVal)
     {
         ArrayList<Resource> arrAllResources = Search.all();
-        ArrayList<Resource> arrHighMemUsageResources = Search.highMemUsage(arrAllResources, 100000);
+        ArrayList<Resource> arrHighMemUsageResources = Search.highMemUsage(arrAllResources, intMemUsageVal);
         Display.resources(arrHighMemUsageResources, true);
         Clean.execute(arrHighMemUsageResources);
     }
 
-    public static void longCPUTime()
+    public static void longCPUTime(String strCPUTime)
     {
         ArrayList<Resource> arrAllResources = Search.all();
-        ArrayList<Resource> arrLongCPUTimeResources = Search.longCPUTime(arrAllResources);
+        ArrayList<Resource> arrLongCPUTimeResources = Search.longCPUTime(arrAllResources, strCPUTime);
         Display.resources(arrLongCPUTimeResources, true);
         Clean.execute(arrLongCPUTimeResources);
     }

@@ -30,6 +30,8 @@ class Display
         System.out.println("      search -m >50000");
         System.out.println("Ex5 (search for resources where PID matched 328:");
         System.out.println("      search -p -e 328");
+        System.out.println("Ex6 (clean resources over custom memory usage and CPU time:");
+        System.out.println("      clean -b -c 90000 00:32:28");
         System.out.println();
 
         System.out.println("Other commands: ?, About, Close, Exit, and Help");
@@ -53,6 +55,7 @@ class Display
         System.out.printf("%-10s %-5s %n", "  -a -r", "Allows user to kill resources by any field using regex");
         System.out.printf("%-10s %-5s %n", "  -a -e", "Allows user to kill resources where any field matches exactly");
         System.out.printf("%-10s %-5s %n", "  -b", "Allows user to kill resources that are deemed possibly bad");
+        System.out.printf("%-10s %-5s %n", "  -b -c", "Allows user to kill resources over custom memory usage and CPU time");
         System.out.printf("%-10s %-5s %n", "  -n", "Allows user to kill resources where name contains criteria");
         System.out.printf("%-10s %-5s %n", "  -n -r", "Allows user to kill resources by name using regex");
         System.out.printf("%-10s %-5s %n", "  -n -e", "Allows user to kill resources where name matches exactly");
@@ -78,7 +81,9 @@ class Display
         System.out.printf("%-10s %-5s %n", "  -w -e", "Allow user to kill resources where window title matches exactly");
         System.out.printf("%-10s %-5s %n", "  -bs", "Allows user to kill resources in a bad status");
         System.out.printf("%-10s %-5s %n", "  -hm", "Allows user to kill resources with high memory usage");
+        System.out.printf("%-10s %-5s %n", "  -hm -c", "Allows user to kill resources over a custom memory usage");
         System.out.printf("%-10s %-5s %n", "  -lc", "Allows user to kill resources with a long CPU time");
+        System.out.printf("%-10s %-5s %n", "  -lc -c", "Allows user to kill resources over a custom CPU time");
     }
 
     public static void helpSearch()
@@ -125,9 +130,12 @@ class Display
         System.out.printf("%-10s %-5s %n", "  ?", "Displays a list of valid flags and help for the view command");
         System.out.printf("%-10s %-5s %n", "  -a", "Displays all of the currently running resources on a system");
         System.out.printf("%-10s %-5s %n", "  -b", "Displays resources with bad status, high memory, or long CPU time");
+        System.out.printf("%-10s %-5s %n", "  -b -c", "Displays resources with over a custom memory usage and CPU time");
         System.out.printf("%-10s %-5s %n", "  -bs", "Displays resources that currently seem to have a bad status");
         System.out.printf("%-10s %-5s %n", "  -hm", "Displays resources that currently have high memory usage");
+        System.out.printf("%-10s %-5s %n", "  -hm -c", "Displays resources that currently have over a custom memory usage");
         System.out.printf("%-10s %-5s %n", "  -lc", "Displays resources that have a long CPU time");
+        System.out.printf("%-10s %-5s %n", "  -lc -c", "Displays resources that have over a custom CPU time");
     }
 
     public static void resources(ArrayList<Resource> arrResources, Boolean bWithIndex)
@@ -178,9 +186,9 @@ class Display
                     }
                     intResourceIndex++;
                 }
-                if(!strInput.equals("a") && arrPages.length > 1)
+                if(!strInput.equals("a") && !strInput.equals("all") && arrPages.length > 1)
                 {
-                    System.out.println("...hit return to view next page or 'a' to view the rest...");
+                    System.out.println("...hit return to view next page or 'all' / 'a' to view the remaining entries...");
                     strInput = Input.waitForReturn();
                 }
             }

@@ -66,51 +66,6 @@ class Input
         return bConfirmation;
     }
 
-    public static Integer getCustomMemUsageVal()
-    {
-        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
-        Integer intCustomMemUsageValue = 100000;
-        Boolean bAcceptableAnswer = false;
-        Boolean bAbort = false;
-
-        try
-        {
-            System.out.println("");
-            System.out.println("Please enter in the memory value you want to use (Must be a positive integer. Enter 'abort' or 'a' to bail.");
-
-            do
-            {
-                String strTemp = bufferedReader.readLine();
-                if (strTemp.replaceAll(",", "").matches("^[0-9]\\d*$"))
-                {
-                    intCustomMemUsageValue = Integer.parseInt(strTemp.replaceAll(",", ""));
-                    bAcceptableAnswer = true;
-                }
-                else if (strTemp.trim().toLowerCase().equals("abort") || strTemp.trim().toLowerCase().equals("a"))
-                {
-                    bAcceptableAnswer = true;
-                    bAbort = true;
-                }
-                else
-                {
-                    System.out.println("The value entered was not a positive integer, please try again:");
-                }
-            }
-            while (!bAcceptableAnswer);
-
-            if(bAbort)
-            {
-                intCustomMemUsageValue = -1;
-            }
-        }
-        catch (Exception exception)
-        {
-            // Do nothing
-        }
-
-        return intCustomMemUsageValue;
-    }
-
     public static ArrayList<Integer> getKillList(Integer intResourcesToKillSize)
     {
         BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
@@ -188,62 +143,6 @@ class Input
         return arrInt;
     }
 
-    public static Object getUseCustomMemUsage()
-    {
-        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
-        Boolean bUseCustomMemUsageVal = false;
-        Boolean bAbort = false;
-        Boolean bValidAnswer = false;
-        String strInput;
-
-        try
-        {
-            System.out.println("");
-            System.out.println("Use custom memory usage value (The default value is 100,000K)? Enter 'yes', 'y', 'no', or 'n' to continue. Enter 'abort' or 'a' to bail.");
-
-            do
-            {
-                strInput = bufferedReader.readLine().trim().toLowerCase();
-                switch(strInput)
-                {
-                    case "yes":
-                    case "y":
-                    case "no":
-                    case "n":
-                        bValidAnswer = true;
-                        break;
-                    case "abort":
-                    case "a":
-                        bValidAnswer = true;
-                        bAbort = true;
-                        break;
-                    default:
-                        System.out.println("You did not enter in a valid answer, please try again:");
-                        break;
-                }
-            }
-            while (!bValidAnswer);
-
-            if(strInput.equals("yes") || strInput.equals("y"))
-            {
-                bUseCustomMemUsageVal = true;
-            }
-        }
-        catch (Exception exception)
-        {
-            // Do nothing
-        }
-
-        if(!bAbort)
-        {
-            return bUseCustomMemUsageVal;
-        }
-        else
-        {
-            return "abort";
-        }
-    }
-
     private static String sanitizeString(String strInput)
     {
         return strInput.replaceAll("[a-zA-Z!@#$%^&*()|?}{<>./~` ]", "").replaceAll("\\[", ""). replaceAll("]", "").replaceAll("-", "");
@@ -259,7 +158,7 @@ class Input
             do
             {
                 strInput = bufferedReader.readLine();
-                if(strInput.trim().length() == 0 || strInput.trim().equals("a"))
+                if(strInput.trim().length() == 0 || strInput.trim().toLowerCase().equals("a") || strInput.trim().toLowerCase().equals("all"))
                 {
                     bReturn = true;
                 }
@@ -271,6 +170,6 @@ class Input
             // Do nothing
         }
 
-        return strInput.trim();
+        return strInput.trim().toLowerCase();
     }
 }

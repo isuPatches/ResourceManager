@@ -103,11 +103,12 @@ class ResourceManager
         StringBuilder strSearchCriteria = new StringBuilder(0);
         for(x = intIndexLastFlag + 1; x < arrCommand.length; x++)
         {
-            strSearchCriteria.append(arrCommand[x]);
+            strSearchCriteria.append(arrCommand[x] + " ");
         }
 
         Boolean bUseRegEx = false;
         Boolean bExactMatch = false;
+        Boolean bUseCustomVal = false;
         if(arrFlags.size() >= 2)
         {
             if(arrFlags.get(1).toLowerCase().equals("-r"))
@@ -118,12 +119,16 @@ class ResourceManager
             {
                 bExactMatch = true;
             }
+            else if(arrFlags.get(1).toLowerCase().equals("-c"))
+            {
+                bUseCustomVal = true;
+            }
         }
 
-        commandExecute(strCommandRoot, arrFlags, strSearchCriteria.toString(), bUseRegEx, bExactMatch);
+        commandExecute(strCommandRoot, arrFlags, strSearchCriteria.toString(), bUseRegEx, bExactMatch, bUseCustomVal);
     }
 
-    private static void commandExecute(String strCommandRoot, ArrayList<String> arrFlags, String strSearchCriteria, Boolean bUseRegEx, Boolean bExactMatch)
+    private static void commandExecute(String strCommandRoot, ArrayList<String> arrFlags, String strSearchCriteria, Boolean bUseRegEx, Boolean bExactMatch, Boolean bUseCustomVal)
     {
         switch(strCommandRoot)
         {
@@ -265,16 +270,79 @@ class ResourceManager
                             View.all();
                             break;
                         case "-b": // View all resources with a bad status, high memory usage, or long cpu time
-                            View.bad();
+                            if(bUseCustomVal)
+                            {
+                                String[] arrTemp = strSearchCriteria.split(" ");
+                                Boolean bFoundCPUTime = false;
+                                Boolean bFoundMemUsageVal = false;
+                                Integer intMemUsageVal = 100000;
+                                String strCPUTime = "";
+                                for(String strTemp : arrTemp)
+                                {
+                                    if(strTemp.replaceAll(",", "").matches("^[0-9]\\d*$"))
+                                    {
+                                        intMemUsageVal = Integer.parseInt(strTemp.replaceAll(",", ""));
+                                        bFoundMemUsageVal = true;
+                                    }
+
+                                    if(strTemp.matches("([0-9]+):([0-5][0-9]):([0-5][0-9])"))
+                                    {
+                                        strCPUTime = strTemp;
+                                        bFoundCPUTime = true;
+                                    }
+                                }
+
+                                if(bFoundCPUTime && bFoundMemUsageVal)
+                                {
+                                    View.bad(intMemUsageVal, strCPUTime);
+                                }
+                                else
+                                {
+                                    System.out.print("Invalid search criteria entered. Example of proper use: view -b -c 90000 00:32:89");
+                                }
+                            }
+                            else
+                            {
+                                View.bad(100000, "00:45:00");
+                            }
                             break;
                         case "-bs": // View all resources in a bad status
                             View.badStatus();
                             break;
                         case "-hm": // View all resources with high memory usage
-                            View.highMemUsage();
+                            if(bUseCustomVal)
+                            {
+                                if(strSearchCriteria.trim().replaceAll(",", "").matches("^[0-9]\\d*$"))
+                                {
+                                    Integer intMemUsage = Integer.parseInt(strSearchCriteria.trim().replaceAll(",", ""));
+                                    View.highMemUsage(intMemUsage);
+                                }
+                                else
+                                {
+                                    System.out.print("Invalid search criteria entered. Example of proper use: view -hm -c 90000");
+                                }
+                            }
+                            else
+                            {
+                                View.highMemUsage(100000);
+                            }
                             break;
                         case "-lc": // View all resources with a long CPU time
-                            View.longCPUTime();
+                            if(bUseCustomVal)
+                            {
+                                if(strSearchCriteria.trim().matches("([0-9]+):([0-5][0-9]):([0-5][0-9])"))
+                                {
+                                    View.longCPUTime(strSearchCriteria.trim());
+                                }
+                                else
+                                {
+                                    System.out.print("Invalid search criteria entered. Example of proper use: view -lc -c 03:28:89");
+                                }
+                            }
+                            else
+                            {
+                                View.longCPUTime("00:45:00");
+                            }
                             break;
                         default:
                             System.out.println("Unrecognized flag for view command, please try again. Type 'view ?' for a list a of valid flags.");
@@ -298,7 +366,40 @@ class ResourceManager
                             Clean.all(strSearchCriteria, bUseRegEx, bExactMatch);
                             break;
                         case "-b":
-                            Clean.bad();
+                            if(bUseCustomVal)
+                            {
+                                String[] arrTemp = strSearchCriteria.split(" ");
+                                Boolean bFoundCPUTime = false;
+                                Boolean bFoundMemUsageVal = false;
+                                Integer intMemUsageVal = 100000;
+                                String strCPUTime = "";
+                                for(String strTemp : arrTemp)
+                                {
+                                    if(strTemp.replaceAll(",", "").matches("^[0-9]\\d*$"))
+                                    {
+                                        intMemUsageVal = Integer.parseInt(strTemp.replaceAll(",", ""));
+                                        bFoundMemUsageVal = true;
+                                    }
+                                    else if(strTemp.matches("([0-9]+):([0-5][0-9]):([0-5][0-9])"))
+                                    {
+                                        strCPUTime = strTemp;
+                                        bFoundCPUTime = true;
+                                    }
+                                }
+
+                                if(bFoundCPUTime && bFoundMemUsageVal)
+                                {
+                                    Clean.bad(intMemUsageVal, strCPUTime);
+                                }
+                                else
+                                {
+                                    System.out.print("Invalid search criteria entered. Example of proper use: view -b -c 90000 00:32:89");
+                                }
+                            }
+                            else
+                            {
+                                Clean.bad(100000, "00:45:00");
+                            }
                             break;
                         case "-n":
                             Clean.byName(strSearchCriteria, bUseRegEx, bExactMatch);
@@ -406,10 +507,39 @@ class ResourceManager
                             Clean.badStatus();
                             break;
                         case "-hm":
-                            Clean.highMemUsage();
+                            if(bUseCustomVal)
+                            {
+                                if(strSearchCriteria.trim().replaceAll(",", "").matches("^[0-9]\\d*$"))
+                                {
+                                    Integer intMemUsage = Integer.parseInt(strSearchCriteria.trim().replaceAll(",", ""));
+                                    Clean.highMemUsage(intMemUsage);
+                                }
+                                else
+                                {
+                                    System.out.print("Invalid search criteria entered. Example of proper use: view -hm -c 100,000");
+                                }
+                            }
+                            else
+                            {
+                                Clean.highMemUsage(10000);
+                            }
                             break;
                         case "-lc":
-                            Clean.longCPUTime();
+                            if(bUseCustomVal)
+                            {
+                                if(strSearchCriteria.trim().matches("([0-9]+):([0-5][0-9]):([0-5][0-9])"))
+                                {
+                                    Clean.longCPUTime(strSearchCriteria.trim());
+                                }
+                                else
+                                {
+                                    System.out.print("Invalid search criteria entered. Example of proper use: view -lc -c 03:28:89");
+                                }
+                            }
+                            else
+                            {
+                                Clean.longCPUTime("00:45:00");
+                            }
                             break;
                         default:
                             System.out.println("Unrecognized flag for clean command, please try again. Type 'clean ?' for a list a of valid flags.");
@@ -489,6 +619,7 @@ class ResourceManager
         ArrayList<Resource> arrAllResources = new ArrayList<>(0);
         ArrayList<String> tempResourcesSplit = new ArrayList<>(0);
         ArrayList<String> tempResourceInfo = new ArrayList<>(0);
+        StringBuilder strWindowTitle = new StringBuilder(0);
 
         for(String strResource : arrResources)
         {
@@ -570,12 +701,12 @@ class ResourceManager
                 }
             }
             // Parses Window Title
-            StringBuilder strWindowTitle = new StringBuilder(0);
             for(int z = y + 1; z < strTempSingleSpace.length;z++)
             {
                 strWindowTitle.append(strTempSingleSpace[z]);
             }
             tempResourceInfo.add(strWindowTitle.toString());
+            strWindowTitle.setLength(0);
 
             newResource.setName(tempResourceInfo.get(0));
             newResource.setPID(tempResourceInfo.get(1));
