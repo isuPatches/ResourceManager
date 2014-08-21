@@ -93,26 +93,29 @@ class Search
         {
             if (strSearchCriteria.replaceAll(",", "").matches("^[0-9]\\d*$"))
             {
-                Integer intMemUsage = Integer.parseInt(strSearchCriteria.replaceAll(",", ""));
-                if (strSearchCriteria.startsWith(">="))
+                if(strSearchCriteria.replaceAll(",", "").trim().length() < 10)
                 {
-                    arrResourcesTemp = Search.byMemUsage(arrAllResources, intMemUsage, ">=");
-                }
-                else if (strSearchCriteria.startsWith("<="))
-                {
-                    arrResourcesTemp = Search.byMemUsage(arrAllResources, intMemUsage, "<=");
-                }
-                else if (strSearchCriteria.startsWith("<"))
-                {
-                    arrResourcesTemp = Search.byMemUsage(arrAllResources, intMemUsage, "<");
-                }
-                else if (strSearchCriteria.startsWith(">"))
-                {
-                    arrResourcesTemp = Search.byMemUsage(arrAllResources, intMemUsage, ">");
-                }
-                else if (strSearchCriteria.startsWith("="))
-                {
-                    arrResourcesTemp = Search.byMemUsage(arrAllResources, intMemUsage, "=");
+                    Integer intMemUsage = Integer.parseInt(strSearchCriteria.replaceAll(",", ""));
+                    if (strSearchCriteria.startsWith(">="))
+                    {
+                        arrResourcesTemp = Search.byMemUsage(arrAllResources, intMemUsage, ">=");
+                    }
+                    else if (strSearchCriteria.startsWith("<="))
+                    {
+                        arrResourcesTemp = Search.byMemUsage(arrAllResources, intMemUsage, "<=");
+                    }
+                    else if (strSearchCriteria.startsWith("<"))
+                    {
+                        arrResourcesTemp = Search.byMemUsage(arrAllResources, intMemUsage, "<");
+                    }
+                    else if (strSearchCriteria.startsWith(">"))
+                    {
+                        arrResourcesTemp = Search.byMemUsage(arrAllResources, intMemUsage, ">");
+                    }
+                    else if (strSearchCriteria.startsWith("="))
+                    {
+                        arrResourcesTemp = Search.byMemUsage(arrAllResources, intMemUsage, "=");
+                    }
                 }
             }
         }

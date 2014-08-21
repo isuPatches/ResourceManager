@@ -95,7 +95,7 @@ class Input
                         String[] arrTemp = strTempSanitized.split(",");
                         for (String strTemp : arrTemp)
                         {
-                            if (strTemp.trim().length() > 0)
+                            if (strTemp.trim().length() > 0 && strTemp.trim().length() < 10)
                             {
                                 boolean bFound = false;
                                 for(Integer intTemp : arrInt)

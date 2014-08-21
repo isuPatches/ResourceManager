@@ -163,30 +163,37 @@ class ResourceManager
                             {
                                 if(strSearchCriteria.replaceAll("[<>=,]", "").matches("^[0-9]\\d*$"))
                                 {
-                                    Integer intMemUsage = Integer.parseInt(strSearchCriteria.replaceAll("[<>=,]", ""));
-                                    if (strSearchCriteria.startsWith(">="))
+                                    if(strSearchCriteria.replaceAll("[<>=,]", "").trim().length() < 10)
                                     {
-                                        View.byMemUsage(intMemUsage, ">=");
-                                    }
-                                    else if (strSearchCriteria.startsWith("<="))
-                                    {
-                                        View.byMemUsage(intMemUsage, "<=");
-                                    }
-                                    else if (strSearchCriteria.startsWith("<"))
-                                    {
-                                        View.byMemUsage(intMemUsage, "<");
-                                    }
-                                    else if (strSearchCriteria.startsWith(">"))
-                                    {
-                                        View.byMemUsage(intMemUsage, ">");
-                                    }
-                                    else if (strSearchCriteria.startsWith("="))
-                                    {
-                                        View.byMemUsage(intMemUsage, "=");
+                                        Integer intMemUsage = Integer.parseInt(strSearchCriteria.replaceAll("[<>=,]", ""));
+                                        if (strSearchCriteria.startsWith(">="))
+                                        {
+                                            View.byMemUsage(intMemUsage, ">=");
+                                        }
+                                        else if (strSearchCriteria.startsWith("<="))
+                                        {
+                                            View.byMemUsage(intMemUsage, "<=");
+                                        }
+                                        else if (strSearchCriteria.startsWith("<"))
+                                        {
+                                            View.byMemUsage(intMemUsage, "<");
+                                        }
+                                        else if (strSearchCriteria.startsWith(">"))
+                                        {
+                                            View.byMemUsage(intMemUsage, ">");
+                                        }
+                                        else if (strSearchCriteria.startsWith("="))
+                                        {
+                                            View.byMemUsage(intMemUsage, "=");
+                                        }
+                                        else
+                                        {
+                                            System.out.print("Invalid search criteria entered. Example of proper use: search -m >32889");
+                                        }
                                     }
                                     else
                                     {
-                                        System.out.print("Invalid search criteria entered. Example of proper use: search -m >32889");
+                                        System.out.println("Invalid search criteria entered.  Please enter in a number < 1,000,000,000");
                                     }
                                 }
                                 else
@@ -232,17 +239,17 @@ class ResourceManager
                                     }
                                     else
                                     {
-                                        System.out.print("Invalid search criteria entered. Example of proper use: search -c >03:28:89");
+                                        System.out.print("Invalid search criteria entered. Example of proper use: search -c >03:28:00");
                                     }
                                 }
                                 else
                                 {
-                                    System.out.print("Invalid search criteria entered. Example of proper use: search -c >03:28:89");
+                                    System.out.print("Invalid search criteria entered. Example of proper use: search -c >03:28:00");
                                 }
                             }
                             else
                             {
-                                System.out.print("Invalid search criteria entered. Example of proper use: search -c >03:28:89");
+                                System.out.print("Invalid search criteria entered. Example of proper use: search -c >03:28:00");
                             }
                             break;
                         case "-w":
@@ -281,8 +288,11 @@ class ResourceManager
                                 {
                                     if(strTemp.replaceAll(",", "").matches("^[0-9]\\d*$"))
                                     {
-                                        intMemUsageVal = Integer.parseInt(strTemp.replaceAll(",", ""));
-                                        bFoundMemUsageVal = true;
+                                        if(strTemp.length() < 10)
+                                        {
+                                            intMemUsageVal = Integer.parseInt(strTemp.replaceAll(",", ""));
+                                            bFoundMemUsageVal = true;
+                                        }
                                     }
 
                                     if(strTemp.matches("([0-9]+):([0-5][0-9]):([0-5][0-9])"))
@@ -298,7 +308,7 @@ class ResourceManager
                                 }
                                 else
                                 {
-                                    System.out.print("Invalid search criteria entered. Example of proper use: view -b -c 90000 00:32:89");
+                                    System.out.print("Invalid search criteria entered. Example of proper use: view -b -c 90000 03:28:00");
                                 }
                             }
                             else
@@ -314,8 +324,15 @@ class ResourceManager
                             {
                                 if(strSearchCriteria.trim().replaceAll(",", "").matches("^[0-9]\\d*$"))
                                 {
-                                    Integer intMemUsage = Integer.parseInt(strSearchCriteria.trim().replaceAll(",", ""));
-                                    View.highMemUsage(intMemUsage);
+                                    if(strSearchCriteria.trim().replaceAll(",", "").length() < 10)
+                                    {
+                                        Integer intMemUsage = Integer.parseInt(strSearchCriteria.trim().replaceAll(",", ""));
+                                        View.highMemUsage(intMemUsage);
+                                    }
+                                    else
+                                    {
+                                        System.out.println("Invalid search criteria entered.  Please enter in a number < 1,000,000,000");
+                                    }
                                 }
                                 else
                                 {
@@ -336,7 +353,7 @@ class ResourceManager
                                 }
                                 else
                                 {
-                                    System.out.print("Invalid search criteria entered. Example of proper use: view -lc -c 03:28:89");
+                                    System.out.print("Invalid search criteria entered. Example of proper use: view -lc -c 03:28:00");
                                 }
                             }
                             else
@@ -377,8 +394,11 @@ class ResourceManager
                                 {
                                     if(strTemp.replaceAll(",", "").matches("^[0-9]\\d*$"))
                                     {
-                                        intMemUsageVal = Integer.parseInt(strTemp.replaceAll(",", ""));
-                                        bFoundMemUsageVal = true;
+                                        if(strTemp.replaceAll(",", "").length() < 10)
+                                        {
+                                            intMemUsageVal = Integer.parseInt(strTemp.replaceAll(",", ""));
+                                            bFoundMemUsageVal = true;
+                                        }
                                     }
                                     else if(strTemp.matches("([0-9]+):([0-5][0-9]):([0-5][0-9])"))
                                     {
@@ -393,7 +413,7 @@ class ResourceManager
                                 }
                                 else
                                 {
-                                    System.out.print("Invalid search criteria entered. Example of proper use: view -b -c 90000 00:32:89");
+                                    System.out.print("Invalid search criteria entered. Example of proper use: view -b -c 90000 03:28:00");
                                 }
                             }
                             else
@@ -418,30 +438,37 @@ class ResourceManager
                             {
                                 if(strSearchCriteria.replaceAll("[<>=,]", "").matches("^[0-9]\\d*$"))
                                 {
-                                    Integer intMemUsage = Integer.parseInt(strSearchCriteria.replaceAll("[<>=,]", ""));
-                                    if(strSearchCriteria.startsWith(">="))
+                                    if(strSearchCriteria.replaceAll("[<>=,]", "").length() < 10)
                                     {
-                                        Clean.byMemUsage(intMemUsage, ">=");
-                                    }
-                                    else if(strSearchCriteria.startsWith("<="))
-                                    {
-                                        Clean.byMemUsage(intMemUsage, "<=");
-                                    }
-                                    else if(strSearchCriteria.startsWith("<"))
-                                    {
-                                        Clean.byMemUsage(intMemUsage, "<");
-                                    }
-                                    else if(strSearchCriteria.startsWith(">"))
-                                    {
-                                        Clean.byMemUsage(intMemUsage, ">");
-                                    }
-                                    else if(strSearchCriteria.startsWith("="))
-                                    {
-                                        Clean.byMemUsage(intMemUsage, "=");
+                                        Integer intMemUsage = Integer.parseInt(strSearchCriteria.replaceAll("[<>=,]", ""));
+                                        if(strSearchCriteria.startsWith(">="))
+                                        {
+                                            Clean.byMemUsage(intMemUsage, ">=");
+                                        }
+                                        else if(strSearchCriteria.startsWith("<="))
+                                        {
+                                            Clean.byMemUsage(intMemUsage, "<=");
+                                        }
+                                        else if(strSearchCriteria.startsWith("<"))
+                                        {
+                                            Clean.byMemUsage(intMemUsage, "<");
+                                        }
+                                        else if(strSearchCriteria.startsWith(">"))
+                                        {
+                                            Clean.byMemUsage(intMemUsage, ">");
+                                        }
+                                        else if(strSearchCriteria.startsWith("="))
+                                        {
+                                            Clean.byMemUsage(intMemUsage, "=");
+                                        }
+                                        else
+                                        {
+                                            System.out.print("Invalid search criteria entered. Example of proper use: search -m >32889");
+                                        }
                                     }
                                     else
                                     {
-                                        System.out.print("Invalid search criteria entered. Example of proper use: search -m >32889");
+                                        System.out.println("Invalid search criteria entered.  Please enter in a number < 1,000,000,000");
                                     }
                                 }
                                 else
@@ -487,17 +514,17 @@ class ResourceManager
                                     }
                                     else
                                     {
-                                        System.out.print("Invalid search criteria entered. Example of proper use: search -c >03:28:89");
+                                        System.out.print("Invalid search criteria entered. Example of proper use: search -c >03:28:00");
                                     }
                                 }
                                 else
                                 {
-                                    System.out.print("Invalid search criteria entered. Example of proper use: search -c >03:28:89");
+                                    System.out.print("Invalid search criteria entered. Example of proper use: search -c >03:28:00");
                                 }
                             }
                             else
                             {
-                                System.out.print("Invalid search criteria entered. Example of proper use: search -c >03:28:89");
+                                System.out.print("Invalid search criteria entered. Example of proper use: search -c >03:28:00");
                             }
                             break;
                         case "-w":
@@ -511,8 +538,15 @@ class ResourceManager
                             {
                                 if(strSearchCriteria.trim().replaceAll(",", "").matches("^[0-9]\\d*$"))
                                 {
-                                    Integer intMemUsage = Integer.parseInt(strSearchCriteria.trim().replaceAll(",", ""));
-                                    Clean.highMemUsage(intMemUsage);
+                                    if(strSearchCriteria.trim().replaceAll(",", "").length() < 10)
+                                    {
+                                        Integer intMemUsage = Integer.parseInt(strSearchCriteria.trim().replaceAll(",", ""));
+                                        Clean.highMemUsage(intMemUsage);
+                                    }
+                                    else
+                                    {
+                                        System.out.println("Invalid search criteria entered.  Please enter in a number < 1,000,000,000");
+                                    }
                                 }
                                 else
                                 {
@@ -533,7 +567,7 @@ class ResourceManager
                                 }
                                 else
                                 {
-                                    System.out.print("Invalid search criteria entered. Example of proper use: view -lc -c 03:28:89");
+                                    System.out.print("Invalid search criteria entered. Example of proper use: view -lc -c 03:28:00");
                                 }
                             }
                             else
