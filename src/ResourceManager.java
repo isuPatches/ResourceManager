@@ -607,26 +607,40 @@ class ResourceManager
             System.out.println();
             for(Resource resource : arrResourcesToKill)
             {
-                if (!resource.getWindowTitle().trim().toLowerCase().contains("resourcemanager") && !resource.getWindowTitle().trim().toLowerCase().contains("java"))
+                if (!resource.getWindowTitle().trim().toLowerCase().contains("resourcemanager.jar"))
                 {
-                    if (System.getProperty("os.name").toLowerCase().contains("windows"))
+                    if(!resource.getName().trim().toLowerCase().contains("java.exe"))
                     {
-                        Runtime.getRuntime().exec("taskkill /F /IM " + resource.getName()).waitFor();
+                        if(!resource.getName().trim().toLowerCase().contains("idea.exe"))
+                        {
+                            if (System.getProperty("os.name").toLowerCase().contains("windows"))
+                            {
+                                Runtime.getRuntime().exec("taskkill /F /IM " + resource.getName()).waitFor();
+                            }
+                            else
+                            {
+                                Runtime.getRuntime().exec("kill -9 " + resource.getName()).waitFor();
+                            }
+                            System.out.println("Killing process with name: " + resource.getName() + " and PID: " + resource.getPID() + "...please wait...");
+                            if (resource.getName().equals("explorer.exe"))
+                            {
+                                System.out.println("Restarting explorer.exe...");
+                                Runtime.getRuntime().exec("explorer.exe");
+                            }
+                        }
+                        else
+                        {
+                            System.out.println("Not letting the app kill the intellij IDE...");
+                        }
                     }
                     else
                     {
-                        Runtime.getRuntime().exec("kill -9 " + resource.getName()).waitFor();
-                    }
-                    System.out.println("Killing process with name: " + resource.getName() + " and PID: " + resource.getPID() + "...please wait...");
-                    if (resource.getName().equals("explorer.exe"))
-                    {
-                        System.out.println("Restarting explorer.exe...");
-                        Runtime.getRuntime().exec("explorer.exe");
+                        System.out.println("Not letting the app kill java.exe...");
                     }
                 }
                 else
                 {
-                    System.out.println("Not letting app kill itself or java...");
+                    System.out.println("Not letting the app kill itself...");
                 }
             }
         }
@@ -654,93 +668,105 @@ class ResourceManager
         ArrayList<String> tempResourcesSplit = new ArrayList<>(0);
         ArrayList<String> tempResourceInfo = new ArrayList<>(0);
         StringBuilder strWindowTitle = new StringBuilder(0);
+        StringBuilder strSessionName = new StringBuilder(0);
+        Integer x;
+        Integer y;
 
         for(String strResource : arrResources)
         {
             tempResourceInfo.clear();
             tempResourcesSplit.clear();
+            strWindowTitle.setLength(0);
+            strSessionName.setLength(0);
 
             Resource newResource = new Resource();
             newResource.create();
 
-            Integer y;
-            String[] strTempDoubleSpace = strResource.split("  ");
+            String[] arrDoubleSpaceSplit = strResource.split("  ");
 
             // Cleans array of additional entries
-            for(y = 0; y < strTempDoubleSpace.length; y++)
+            for(String strTemp : arrDoubleSpaceSplit)
             {
                 // If the value in the array at the y index is empty (no chars other than "")
-                if(strTempDoubleSpace[y].trim().length() != 0)
+                if(strTemp.trim().length() != 0)
                 {
-                    tempResourcesSplit.add(strTempDoubleSpace[y]);
+                    tempResourcesSplit.add(strTemp);
                 }
             }
 
-            // Parses resource name
+            // Parses the name
             tempResourceInfo.add(tempResourcesSplit.get(0).trim());
 
-            // Parses PID info
-            String[] strTempSingleSpace = tempResourcesSplit.get(1).split(" ");
-            for(y = 0;y < strTempSingleSpace.length; y++)
+            // Parses the PID
+            String[] arrSingleSpaceSplit = tempResourcesSplit.get(1).split(" ");
+            for(x = 0;x < arrSingleSpaceSplit.length; x++)
             {
-                if(strTempSingleSpace[y].trim().length() != 0)
+                if(arrSingleSpaceSplit[x].trim().length() != 0)
                 {
-                    tempResourceInfo.add(strTempSingleSpace[y].trim());
                     break;
                 }
             }
-            // Parses session name info
-            // Starts at y + 1 to skip previously search parts
-            for(int n = y + 1;n < strTempDoubleSpace.length; n++)
-            {
-                if(strTempSingleSpace[n].trim().length() != 0)
-                {
-                    tempResourceInfo.add(strTempSingleSpace[n].trim());
-                    break;
-                }
-            }
+            tempResourceInfo.add(arrSingleSpaceSplit[x].trim());
 
-            // Parses the session number info - removes spaces
+            // Parses session name
+            // Starts at x + 1 to skip previously searched parts
+            for(y = x + 1;y < arrSingleSpaceSplit.length; y++)
+            {
+                if(arrSingleSpaceSplit[y].trim().length() != 0)
+                {
+                    strSessionName.append(arrSingleSpaceSplit[y]);
+                }
+            }
+            tempResourceInfo.add(strSessionName.toString());
+
+            // Parses the session number
             tempResourceInfo.add(tempResourcesSplit.get(2).trim());
 
-            // Parses the memory usage and status info - removes spaces, comma, and K and splits at space
-            strTempSingleSpace = tempResourcesSplit.get(3).replaceAll(",", "").replaceAll("K", "").split(" ");
-            for(y = 0;y < strTempSingleSpace.length; y++)
+            // Parses the memory usage and status - removes spaces, comma, and K and splits at space
+            arrSingleSpaceSplit = tempResourcesSplit.get(3).replaceAll(",", "").replaceAll("K", "").split(" ");
+            for(x = 0;x < arrSingleSpaceSplit.length; x++)
             {
-                if(strTempSingleSpace[y].equals("Not") && strTempSingleSpace[y + 1].equals("Responding"))
+                if(arrSingleSpaceSplit[x].equals("Not") && arrSingleSpaceSplit[x + 1].equals("Responding"))
                 {
-                    tempResourceInfo.add(strTempSingleSpace[y] + ' ' + strTempSingleSpace[y+1]);
+                    tempResourceInfo.add(arrSingleSpaceSplit[x] + ' ' + arrSingleSpaceSplit[x + 1]);
                     y++;
                 }
                 else
                 {
-                    if (strTempSingleSpace[y].trim().length() > 0)
+                    if(arrSingleSpaceSplit[x].trim().length() > 0)
                     {
-                        tempResourceInfo.add(strTempSingleSpace[y]);
+                        tempResourceInfo.add(arrSingleSpaceSplit[x]);
                     }
                 }
             }
 
-            // Parses the uer name info
+            // Parses the user name
             tempResourceInfo.add(tempResourcesSplit.get(4).trim());
 
             // Parses the CPU Time
-            strTempSingleSpace = tempResourcesSplit.get(5).split(" ");
-            for(y = 0;y < strTempSingleSpace.length; y++)
+            arrSingleSpaceSplit = tempResourcesSplit.get(5).split(" ");
+            for(x = 0; x < arrSingleSpaceSplit.length; x++)
             {
-                if(strTempSingleSpace[y].matches("([0-9]+):([0-5][0-9]):([0-5][0-9])"))
+                if(arrSingleSpaceSplit[x].matches("([0-9]+):([0-5][0-9]):([0-5][0-9])"))
                 {
-                    tempResourceInfo.add(strTempSingleSpace[y]);
+                    tempResourceInfo.add(arrSingleSpaceSplit[x]);
                     break;
                 }
             }
-            // Parses Window Title
-            for(int z = y + 1; z < strTempSingleSpace.length;z++)
+
+            // Parses the window title
+            for(y  = x + 1; y < arrSingleSpaceSplit.length;y++)
             {
-                strWindowTitle.append(strTempSingleSpace[z]);
+                strWindowTitle.append(arrSingleSpaceSplit[y]).append(' ');
+            }
+            if(tempResourcesSplit.size() > 6)
+            {
+                for(x = 5; x < tempResourcesSplit.size(); x++)
+                {
+                    strWindowTitle.append(tempResourcesSplit.get(x)).append(' ');
+                }
             }
             tempResourceInfo.add(strWindowTitle.toString());
-            strWindowTitle.setLength(0);
 
             newResource.setName(tempResourceInfo.get(0));
             newResource.setPID(tempResourceInfo.get(1));
