@@ -7,7 +7,7 @@ class Display
         System.out.println();
         System.out.println("Author: Patches Klinefelter");
         System.out.println("Version: 1.0");
-        System.out.println("Created August 2015");
+        System.out.println("Date: August 2014");
     }
 
     public static void help()
@@ -168,6 +168,7 @@ class Display
 
             System.out.println();
             intResourceIndex = 0;
+            intPageIndex = 0;
             String strInput = "";
             for(Resource[] page : arrPages)
             {
@@ -186,7 +187,8 @@ class Display
                     }
                     intResourceIndex++;
                 }
-                if(!strInput.equals("a") && !strInput.equals("all") && arrPages.length > 1)
+                intPageIndex++;
+                if(!strInput.equals("a") && !strInput.equals("all") && arrPages.length > 1 && intPageIndex < arrPages.length)
                 {
                     System.out.println("...hit return to view next page or 'all' / 'a' to view the remaining entries...");
                     strInput = Input.waitForReturn();

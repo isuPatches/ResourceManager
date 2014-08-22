@@ -480,7 +480,7 @@ class Search
             bValidRegEx = checkRegExSyntax(strSearchCriteria);
             if(bValidRegEx)
             {
-                if(strCompare.matches(strSearchCriteria))
+                if(strCompare.matches(strSearchCriteria.trim()))
                 {
                     bCompareResult = true;
                 }
@@ -490,7 +490,7 @@ class Search
         {
             if(bExactMatch)
             {
-                if(strCompare.equals(strSearchCriteria))
+                if(strCompare.equals(strSearchCriteria.trim()))
                 {
                     bCompareResult = true;
                 }

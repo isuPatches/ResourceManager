@@ -103,7 +103,7 @@ class ResourceManager
         StringBuilder strSearchCriteria = new StringBuilder(0);
         for(x = intIndexLastFlag + 1; x < arrCommand.length; x++)
         {
-            strSearchCriteria.append(arrCommand[x] + " ");
+            strSearchCriteria.append(arrCommand[x]).append(' ');
         }
 
         Boolean bUseRegEx = false;
@@ -286,13 +286,10 @@ class ResourceManager
                                 String strCPUTime = "";
                                 for(String strTemp : arrTemp)
                                 {
-                                    if(strTemp.replaceAll(",", "").matches("^[0-9]\\d*$"))
+                                    if(strTemp.replaceAll(",", "").matches("^[0-9]\\d*$") && strTemp.length() < 10)
                                     {
-                                        if(strTemp.length() < 10)
-                                        {
-                                            intMemUsageVal = Integer.parseInt(strTemp.replaceAll(",", ""));
-                                            bFoundMemUsageVal = true;
-                                        }
+                                        intMemUsageVal = Integer.parseInt(strTemp.replaceAll(",", ""));
+                                        bFoundMemUsageVal = true;
                                     }
 
                                     if(strTemp.matches("([0-9]+):([0-5][0-9]):([0-5][0-9])"))
@@ -724,12 +721,12 @@ class ResourceManager
 
             // Parses the memory usage and status - removes spaces, comma, and K and splits at space
             arrSingleSpaceSplit = tempResourcesSplit.get(3).replaceAll(",", "").replaceAll("K", "").split(" ");
-            for(x = 0;x < arrSingleSpaceSplit.length; x++)
+            for(x = 0; x < arrSingleSpaceSplit.length; x++)
             {
                 if(arrSingleSpaceSplit[x].equals("Not") && arrSingleSpaceSplit[x + 1].equals("Responding"))
                 {
                     tempResourceInfo.add(arrSingleSpaceSplit[x] + ' ' + arrSingleSpaceSplit[x + 1]);
-                    y++;
+                    x++;
                 }
                 else
                 {
