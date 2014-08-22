@@ -262,7 +262,7 @@ class ResourceManager
                 }
                 else
                 {
-                    System.out.println("Can't execute command without a flag, please try again. Type 'search ?' for a list a of valid flags.");
+                    System.out.println("Invalid or no command flag, please try again. Type 'search ?' for a list a of valid flags.");
                 }
                 break;
             case "view":
@@ -368,7 +368,7 @@ class ResourceManager
                 }
                 else
                 {
-                    System.out.println("Can't execute command without a flag, please try again. Type 'view ?' for a list a of valid flags.");
+                    System.out.println("Invalid or no command flag, please try again. Type 'view ?' for a list a of valid flags.");
                 }
                 break;
             case "clean":
@@ -582,7 +582,7 @@ class ResourceManager
                 }
                 else
                 {
-                    System.out.println("Can't execute command without a flag, please try again. Type 'clean ?' for a list a of valid flags.");
+                    System.out.println("Invalid or no command flag, please try again. Type 'clean ?' for a list a of valid flags.");
                 }
                 break;
             case "help":
